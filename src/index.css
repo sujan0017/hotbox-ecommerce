@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.primaryGradient {
+  @apply bg-gradient-to-r  from-red-600  to-red-400;
+}
