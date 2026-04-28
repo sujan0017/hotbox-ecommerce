@@ -6,7 +6,7 @@ const navMenu = [
   },
   {
     title: "Products",
-    href: "/products",
+    href: "/product",
     isLoginStatus: true,
   },
 

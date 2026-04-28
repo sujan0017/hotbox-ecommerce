@@ -5,26 +5,41 @@ import {
   RouterProvider,
 } from "react-router";
 import MainLayout from "./layout/MainLayout";
-import Hero from "./pages/Hero";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
-import Products from "./pages/Products";
+import Home from "./pages/Home";
+import UnAuthLayout from "./layout/UnAuthLayout";
+import AuthLayout from "./layout/AuthLayout";
+import { useSelector } from "react-redux";
+import PageNoFound from "./pages/PageNoFound";
+import ProductList from "./pages/product/ProductList";
+import ProductDetail from "./pages/product/ProductDetail";
 
 const App = () => {
+  const { user } = useSelector((state) => state.auth);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Hero />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/products" element={<Products />} />
+        <Route element={<AuthLayout user={user} />}>
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
 
-        <Route path="auth">
+          <Route path="/product">
+            <Route index element={<ProductList />} />
+            <Route path=":id" element={<ProductDetail />} />
+          </Route>
+        </Route>
+
+        <Route path="auth" element={<UnAuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<SignUp />} />
         </Route>
+
+        <Route path="*" element={<PageNoFound />} />
       </Route>,
     ),
   );

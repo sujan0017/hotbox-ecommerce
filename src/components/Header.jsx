@@ -1,9 +1,20 @@
 import { NavLink } from "react-router";
 import { navMenu } from "../constant/navMenu";
 import Logo from "./Logo";
+import { useDispatch, useSelector } from "react-redux";
+import { PrimaryButton } from "./Button";
+import { logOut } from "../redux/auth/authSlicer";
 
 const Header = () => {
-  const isLogin = true;
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const isLogin = user ? true : false;
+
+  const handleLogOut = () => {
+    console.log("user logged out");
+    dispatch(logOut());
+  };
 
   return (
     <header className="flex items-center justify-between px-10 py-5 shadow-xl">
@@ -20,6 +31,15 @@ const Header = () => {
               {menu.title}
             </NavLink>
           ))}
+
+        {isLogin && (
+          <div className="flex items-center justify-center gap-5">
+            <span>|</span>
+            <span onClick={handleLogOut}>
+              <PrimaryButton  title={"LogOut"} />
+            </span>
+          </div>
+        )}
       </div>
     </header>
   );

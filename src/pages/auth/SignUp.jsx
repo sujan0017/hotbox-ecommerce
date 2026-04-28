@@ -1,4 +1,4 @@
-import RegisterForm from "../../components/RegisterForm";
+import RegisterForm from "../../components/auth/RegisterForm";
 function SignUp() {
   return (
     <div className="grid grid-cols-2 w-3/4 shadow-xl border border-slate-300 rounded mx-auto mt-10 ">
