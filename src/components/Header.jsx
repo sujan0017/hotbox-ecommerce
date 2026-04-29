@@ -12,8 +12,8 @@ const Header = () => {
   const isLogin = user ? true : false;
 
   const handleLogOut = () => {
-    console.log("user logged out");
     dispatch(logOut());
+    localStorage.clear("authToken")
   };
 
   return (

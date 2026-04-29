@@ -1,14 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllProduct, getProductById } from "./productAction.js";
+import {
+  addProduct,
+  getAllProduct,
+  getProductByCategories,
+  getProductById,
+} from "./productAction.js";
 
 const productSlicer = createSlice({
   name: "product",
   initialState: {
     products: [],
+    categories: [],
     selectedProduct: null,
     loading: false,
     error: null,
     query: null,
+    add: {
+      loading: false,
+      success: false,
+    },
   },
   reducers: {
     setLimit: (state, action) => {
@@ -35,6 +45,7 @@ const productSlicer = createSlice({
         state.error = action.payload;
         state.loading = false;
       })
+
       .addCase(getProductById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -46,6 +57,34 @@ const productSlicer = createSlice({
       .addCase(getProductById.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
+      })
+
+      .addCase(getProductByCategories.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getProductByCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
+        state.loading = false;
+      })
+      .addCase(getProductByCategories.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      })
+
+      .addCase(addProduct.pending, (state) => {
+        state.add.loading = true;
+        state.add.success = false;
+        state.error = null;
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.add.success = true;
+        state.add.loading = false;
+      })
+      .addCase(addProduct.rejected, (state, action) => {
+        state.error = action.payload;
+        state.add.loading = false;
+        state.add.success = false;
       });
   },
 });

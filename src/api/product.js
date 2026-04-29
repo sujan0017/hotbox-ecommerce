@@ -1,5 +1,4 @@
-import axios from "axios";
-import config from "../config/config";
+import api from "./api";
 
 const getProduct = async ({
   sort = { createdAt: -1 },
@@ -9,15 +8,32 @@ const getProduct = async ({
 }) => {
   const query = `limit=${limit}&offset=0&sort=${JSON.stringify(sort)}&filters=${JSON.stringify(filters)}&page=${page}`;
 
-  const response = await axios.get(`${config.apiUrl}/api/products?${query}`);
+  const response = await api.get(`/products?${query}`);
 
   return response;
 };
 
 const getProductId = async (id) => {
-  const response = await axios.get(`${config.apiUrl}/api/products/${id}`);
+  const response = await api.get(`/products/${id}`);
 
   return response;
 };
 
-export { getProduct, getProductId };
+const getProductCategories = async () => {
+  const response = await api.get(`/products/categories`);
+
+  return response;
+};
+
+const addNewProduct = async ({ name, category, brand, price }) => {
+  const response = await api.post("/products", {
+    name,
+    category,
+    brand,
+    price,
+  });
+
+  return response;
+};
+
+export { getProduct, getProductId, getProductCategories, addNewProduct };

@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setFilters,
   setLimit,
@@ -7,14 +7,13 @@ import {
 
 function ProductFilter() {
   const dispatch = useDispatch();
+  const { query, categories } = useSelector((state) => state.product);
 
   const setProductLimit = (limit) => {
     dispatch(setLimit(Number(limit)));
   };
 
   const setProductSort = (sort) => {
-    console.log(sort);
-    console.log(JSON.parse(sort));
     dispatch(setSort(JSON.parse(sort)));
   };
 
@@ -34,17 +33,32 @@ function ProductFilter() {
           onChange={(e) => filtersByName(e.target.value)}
           id="name"
           type="text"
+          value={query?.filters?.name}
           className=" border border-slate-200 rounded p-1"
         />
       </div>
       <div className="flex items-center gap-2">
         <label htmlFor="category">Category</label>
-        <input
+        {/* <input
           onChange={(e) => filtersByCategory(e.target.value)}
           id="category"
           type="text"
+          value={query?.filters?.category}
           className=" border border-slate-200 rounded p-1"
-        />
+        /> */}
+        <select
+          onChange={(e) => filtersByCategory(e.target.value)}
+          name="category"
+          id="category"
+          value={query?.filters?.category}
+        >
+          <option value="">Select Category</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="flex items-center gap-2 border border-slate-200 p-1 rounded">
@@ -53,6 +67,7 @@ function ProductFilter() {
           onChange={(e) => setProductSort(e.target.value)}
           name="sort"
           id="sort"
+          value={JSON.stringify(query?.sort)}
         >
           <option value={JSON.stringify({ createdAt: -1 })}>Latest</option>
           <option value={JSON.stringify({ price: 1 })}>
@@ -67,6 +82,7 @@ function ProductFilter() {
       <div className="flex items-center gap-2 border border-slate-200 p-1 rounded">
         <label htmlFor="limit"> limit</label>
         <select
+          value={query?.limit ?? 10}
           onChange={(e) => setProductLimit(e.target.value)}
           name="limit"
           id="limit"
