@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addProduct,
+  deleteById,
   getAllProduct,
   getProductByCategories,
   getProductById,
@@ -19,6 +20,10 @@ const productSlicer = createSlice({
       loading: false,
       success: false,
     },
+    delete: {
+      loading: false,
+      success: false,
+    },
   },
   reducers: {
     setLimit: (state, action) => {
@@ -28,7 +33,7 @@ const productSlicer = createSlice({
       state.query = { ...state.query, sort: action.payload };
     },
     setFilters: (state, action) => {
-      state.query = { ...state.action, filters: action.payload };
+      state.query = { ...state.query, filters: action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -77,7 +82,7 @@ const productSlicer = createSlice({
         state.add.success = false;
         state.error = null;
       })
-      .addCase(addProduct.fulfilled, (state, action) => {
+      .addCase(addProduct.fulfilled, (state) => {
         state.add.success = true;
         state.add.loading = false;
       })
@@ -85,6 +90,21 @@ const productSlicer = createSlice({
         state.error = action.payload;
         state.add.loading = false;
         state.add.success = false;
+      })
+
+      .addCase(deleteById.pending, (state) => {
+        state.delete.loading = true;
+        state.delete.success = false;
+        state.error = null;
+      })
+      .addCase(deleteById.fulfilled, (state) => {
+        state.delete.loading = false;
+        state.delete.success = true;
+      })
+      .addCase(deleteById.rejected, (state, action) => {
+        state.error = action.payload;
+        state.delete.loading = false;
+        state.delete.success = false;
       });
   },
 });

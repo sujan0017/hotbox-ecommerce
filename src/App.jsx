@@ -8,7 +8,6 @@ import MainLayout from "./layout/MainLayout";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/auth/Login";
-import SignUp from "./pages/auth/SignUp";
 import Home from "./pages/Home";
 import UnAuthLayout from "./layout/UnAuthLayout";
 import AuthLayout from "./layout/AuthLayout";
@@ -16,6 +15,7 @@ import { useSelector } from "react-redux";
 import PageNoFound from "./pages/PageNoFound";
 import ProductList from "./pages/product/ProductList";
 import ProductDetail from "./pages/product/ProductDetail";
+import Register from "./pages/auth/Register";
 
 const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -36,7 +36,7 @@ const App = () => {
 
         <Route path="auth" element={<UnAuthLayout />}>
           <Route path="login" element={<Login />} />
-          <Route path="register" element={<SignUp />} />
+          <Route path="register" element={<Register />} />
         </Route>
 
         <Route path="*" element={<PageNoFound />} />

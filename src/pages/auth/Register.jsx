@@ -1,5 +1,5 @@
 import RegisterForm from "../../components/auth/RegisterForm";
-function SignUp() {
+function Register() {
   return (
     <div className="grid grid-cols-2 w-3/4 shadow-xl border border-slate-300 rounded mx-auto mt-10 ">
       <div className="primaryGradient p-5 text-center flex flex-col justify-center text-white gap-2">
@@ -15,4 +15,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default Register;

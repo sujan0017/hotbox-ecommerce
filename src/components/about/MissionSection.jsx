@@ -1,7 +1,9 @@
+import Container from "../Container";
 
 function MissionSection() {
   return (
-     <section className="max-w-5xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
+    <Container>
+      <section className="max-w-5xl mx-auto  py-24 grid md:grid-cols-2 gap-16 items-center">
         <div>
           <p className="text-xs uppercase tracking-widest text-red-500 mb-4">
             Our Mission
@@ -32,7 +34,8 @@ function MissionSection() {
           </p>
         </div>
       </section>
-  )
+    </Container>
+  );
 }
 
-export default MissionSection
+export default MissionSection;

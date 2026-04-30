@@ -36,4 +36,16 @@ const addNewProduct = async ({ name, category, brand, price }) => {
   return response;
 };
 
-export { getProduct, getProductId, getProductCategories, addNewProduct };
+const deleteProduct = async (id) => {
+  const response = await api.delete(`/products/${id}`);
+
+  return response;
+};
+
+export {
+  getProduct,
+  getProductId,
+  getProductCategories,
+  addNewProduct,
+  deleteProduct,
+};

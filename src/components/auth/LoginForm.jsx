@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "../../constant/regex";
+import { EMAIL_REGEX } from "../../constant/regex";
 import { useState } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
@@ -51,21 +51,6 @@ const LoginForm = () => {
           <input
             {...register("password", {
               required: "Password is required.",
-              // minLength: {
-              //   value: 8,
-              //   message: "Password must be at least 8 characters.",
-              // },
-              // validate: {
-              //   hasUpperCase: (value) =>
-              //     PASSWORD_REGEX.upper.test(value) ||
-              //     "Password must include at least one uppercase letter.",
-              //   hasLowerCase: (value) =>
-              //     PASSWORD_REGEX.lower.test(value) ||
-              //     "Password must include at least one lowercase letter.",
-              //   hasNumber: (value) =>
-              //     PASSWORD_REGEX.number.test(value) ||
-              //     "Password must include at least one number.",
-              // },
             })}
             className="border p-1 w-full shadow border-slate-300 rounded"
             type={showPassword ? "text" : "password"}
