@@ -5,6 +5,7 @@ import { getProductById } from "../../redux/product/productAction";
 import Spinner from "../../components/Spinner";
 import { FaCartArrowDown } from "react-icons/fa";
 import Container from "../../components/Container";
+import { addProductToCart } from "../../redux/cart/cartSlicer";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -12,6 +13,10 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
 
   const { selectedProduct, loading } = useSelector((state) => state.product);
+
+  const { product } = useSelector((state) => state.cart);
+
+  console.log(product)
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -73,16 +78,19 @@ const ProductDetail = () => {
               <h5 className="font-semibold ">Quantity</h5>
               <div className="flex items-center justify-start gap-5">
                 <button className="border px-3 py-2 rounded border-slate-200">
-                  +
-                </button>
-                <h5>1</h5>
-                <button className="border px-3 py-2 rounded border-slate-200">
                   -
+                </button>
+                <h5>{product.quantity}</h5>
+                <button className="border px-3 py-2 rounded border-slate-200">
+                  +
                 </button>
               </div>
             </div>
 
-            <button className="bg-red-600 hover:bg-red-700 py-2 text-white flex items-center justify-center gap-3 ">
+            <button
+              onClick={() => dispatch(addProductToCart(selectedProduct))}
+              className="bg-red-600 hover:bg-red-700 py-2 text-white flex items-center justify-center gap-3 cursor-pointer "
+            >
               Add to cart
               <span>
                 <FaCartArrowDown />

@@ -8,25 +8,25 @@ const getProduct = async ({
 }) => {
   const query = `limit=${limit}&offset=0&sort=${JSON.stringify(sort)}&filters=${JSON.stringify(filters)}&page=${page}`;
 
-  const response = await api.get(`/products?${query}`);
+  const response = await api.get(`products?${query}`);
 
   return response;
 };
 
 const getProductId = async (id) => {
-  const response = await api.get(`/products/${id}`);
+  const response = await api.get(`products/${id}`);
 
   return response;
 };
 
 const getProductCategories = async () => {
-  const response = await api.get(`/products/categories`);
+  const response = await api.get(`products/categories`);
 
   return response;
 };
 
 const addNewProduct = async ({ name, category, brand, price }) => {
-  const response = await api.post("/products", {
+  const response = await api.post("products", {
     name,
     category,
     brand,
@@ -37,7 +37,18 @@ const addNewProduct = async ({ name, category, brand, price }) => {
 };
 
 const deleteProduct = async (id) => {
-  const response = await api.delete(`/products/${id}`);
+  const response = await api.delete(`products/${id}`);
+
+  return response;
+};
+
+const editProduct = async (id, { name, category, brand, price }) => {
+  const response = await api.put(`products/${id}`, {
+    name,
+    category,
+    brand,
+    price,
+  });
 
   return response;
 };
@@ -48,4 +59,5 @@ export {
   getProductCategories,
   addNewProduct,
   deleteProduct,
+  editProduct,
 };

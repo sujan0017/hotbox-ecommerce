@@ -11,7 +11,7 @@ const storage = {
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

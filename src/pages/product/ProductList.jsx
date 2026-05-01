@@ -20,14 +20,14 @@ const ProductList = () => {
     products,
     loading,
     query,
-    add: { success: addSuccess },
+    add: {success:addSuccess},
     delete: { success: deleteSuccess },
   } = useSelector((state) => state.product);
 
   useEffect(() => {
     dispatch(getAllProduct(query));
     dispatch(getProductByCategories());
-  }, [dispatch, query, addSuccess, deleteSuccess]);
+  }, [dispatch, query, deleteSuccess, addSuccess]);
 
   useEffect(() => {
     if (addSuccess) {

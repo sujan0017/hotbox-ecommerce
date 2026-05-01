@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addProduct,
   deleteById,
+  editProductById,
   getAllProduct,
   getProductByCategories,
   getProductById,
@@ -21,6 +22,10 @@ const productSlicer = createSlice({
       success: false,
     },
     delete: {
+      loading: false,
+      success: false,
+    },
+    edit: {
       loading: false,
       success: false,
     },
@@ -105,6 +110,21 @@ const productSlicer = createSlice({
         state.error = action.payload;
         state.delete.loading = false;
         state.delete.success = false;
+      })
+
+      .addCase(editProductById.pending, (state) => {
+        state.edit.loading = true;
+        state.edit.success = false;
+        state.error = null;
+      })
+      .addCase(editProductById.fulfilled, (state) => {
+        state.edit.loading = false;
+        state.edit.success = true;
+      })
+      .addCase(editProductById.rejected, (state, action) => {
+        state.error = action.payload;
+        state.edit.loading = false;
+        state.edit.success = false;
       });
   },
 });

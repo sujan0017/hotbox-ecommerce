@@ -1,17 +1,18 @@
 import { useForm } from "react-hook-form";
 import { IoAdd } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../redux/product/productAction";
+import { addProduct, editProductById } from "../../redux/product/productAction";
 import Spinner from "../Spinner";
 import { useEffect } from "react";
+import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router";
 
-function AddProductForm() {
+function AddProductForm({ productToEdit }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const {
-    add: { loading, success },
+    add: { loading: addLoading, success: addSuccess },
+    edit: { loading: editLoading, success: editSuccess },
   } = useSelector((state) => state.product);
   const {
     register,
@@ -21,15 +22,39 @@ function AddProductForm() {
   } = useForm();
 
   const submitAddProduct = (data) => {
-    dispatch(addProduct(data));
+    if (productToEdit) {
+      dispatch(editProductById({ _id: productToEdit._id, ...data }));
+    } else {
+      dispatch(addProduct(data));
+    }
   };
 
   useEffect(() => {
-    if (success) {
+    if (addSuccess) reset();
+
+    if (editSuccess) {
       reset();
       navigate("/product");
     }
-  }, [success, reset, navigate]);
+  }, [addSuccess, editSuccess, reset, navigate]);
+
+  useEffect(() => {
+    if (productToEdit) {
+      reset({
+        name: productToEdit.name,
+        category: productToEdit.category,
+        brand: productToEdit.brand,
+        price: productToEdit.price,
+      });
+    } else {
+      reset({
+        name: "",
+        category: "",
+        brand: "",
+        price: "",
+      });
+    }
+  }, [productToEdit, reset]);
 
   return (
     <form
@@ -39,6 +64,7 @@ function AddProductForm() {
       <div className="flex flex-col gap-2">
         <label htmlFor="name">Name</label>
         <input
+         
           {...register("name", {
             required: "Name is required",
           })}
@@ -85,8 +111,16 @@ function AddProductForm() {
       </div>
 
       <button className="py-1 px-4 rounded bg-green-600 hover:bg-green-700 flex justify-center items-center gap-2 mt-5 max-w-max self-center ">
-        Add product{" "}
-        <span>{loading ? <Spinner /> : <IoAdd className="text-xl" />}</span>
+        {productToEdit ? "Edit Product" : " Add product"}
+        <span>
+          {addLoading || editLoading ? (
+            <Spinner />
+          ) : productToEdit ? (
+            <CiEdit />
+          ) : (
+            <IoAdd className="text-xl" />
+          )}
+        </span>
       </button>
     </form>
   );
