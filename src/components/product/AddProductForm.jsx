@@ -6,6 +6,7 @@ import Spinner from "../Spinner";
 import { useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 import { useNavigate } from "react-router";
+import { PRODUCT_ROUTE } from "../../constant/route";
 
 function AddProductForm({ productToEdit }) {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ function AddProductForm({ productToEdit }) {
 
     if (editSuccess) {
       reset();
-      navigate("/product");
+      navigate(`/${PRODUCT_ROUTE}`);
     }
   }, [addSuccess, editSuccess, reset, navigate]);
 
@@ -64,10 +65,10 @@ function AddProductForm({ productToEdit }) {
       <div className="flex flex-col gap-2">
         <label htmlFor="name">Name</label>
         <input
-         
           {...register("name", {
             required: "Name is required",
           })}
+          id="name"
           type="text"
           className="border p-1 shadow border-slate-300 rounded"
         />
@@ -80,6 +81,7 @@ function AddProductForm({ productToEdit }) {
           {...register("category", {
             required: "Category is required",
           })}
+          id="category"
           type="text"
           className="border p-1 shadow border-slate-300 rounded"
         />
@@ -92,6 +94,7 @@ function AddProductForm({ productToEdit }) {
           {...register("brand", {
             required: "Brand is required",
           })}
+          id="brand"
           type="text"
           className="border p-1 shadow border-slate-300 rounded"
         />
@@ -104,6 +107,7 @@ function AddProductForm({ productToEdit }) {
           {...register("price", {
             required: "Price is required",
           })}
+          id="price"
           type="number"
           className="border p-1 shadow border-slate-300 rounded"
         />
@@ -122,6 +126,7 @@ function AddProductForm({ productToEdit }) {
           )}
         </span>
       </button>
+      
     </form>
   );
 }

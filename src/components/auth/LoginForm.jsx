@@ -7,6 +7,7 @@ import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/auth/authAction";
 import Spinner from "../Spinner";
+import { AUTH_ROUTE, REGISTER_ROUTE } from "../../constant/route";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -72,7 +73,10 @@ const LoginForm = () => {
           {loading && <Spinner />}
         </span>
       </button>
-      <Link to="/auth/register" className="text-center mt-2">
+      <Link
+        to={`/${AUTH_ROUTE}/${REGISTER_ROUTE}`}
+        className="text-center mt-2"
+      >
         Don't have an account,{" "}
         <span className="text-blue-500 cursor-pointer hover:underline">
           register

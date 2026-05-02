@@ -1,6 +1,7 @@
 import Container from "../Container";
 
 function TrendingProducts() {
+  
   return (
     <>
       <Container>

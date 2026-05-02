@@ -7,6 +7,7 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from "../../constant/regex";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/auth/authAction";
 import Spinner from ".././Spinner";
+import { AUTH_ROUTE, LOGIN_ROUTE } from "../../constant/route";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -37,13 +38,13 @@ const SignUp = () => {
         <label htmlFor="name">Full Name </label>
         <input
           {...register("name", {
-            required: "Full Name is required.",
+            required: "Name is required.",
           })}
           className="border p-1 shadow border-slate-300 rounded"
           type="text"
+          id="name"
         />
-
-        <p className="text-red-500 text-sm -mt-1">{errors.fullName?.message}</p>
+        <p className="text-red-500 text-sm -mt-1">{errors.name?.message}</p>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -58,8 +59,8 @@ const SignUp = () => {
           })}
           className="border p-1 shadow border-slate-300 rounded"
           type="text"
+          id="email"
         />
-
         <p className="text-red-500 text-sm -mt-1">{errors.email?.message}</p>
       </div>
 
@@ -87,6 +88,7 @@ const SignUp = () => {
             })}
             className="border p-1 w-full shadow border-slate-300 rounded"
             type={showPassword ? "text" : "password"}
+            id="password"
           />
           <span
             onClick={() => setShowPassword(!showPassword)}
@@ -95,12 +97,11 @@ const SignUp = () => {
             {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
         </div>
-
         <p className="text-red-500 text-sm -mt-1">{errors.password?.message}</p>
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="password absolute ">Confirm Password</label>
+        <label htmlFor="confirmPassword">Confirm Password</label>
         <div className="w-full relative">
           <input
             {...register("confirmPassword", {
@@ -110,6 +111,7 @@ const SignUp = () => {
             })}
             className="border p-1 w-full shadow border-slate-300 rounded"
             type={showConfirmPassword ? "text" : "password"}
+            id="confirmPassword"
           />
           <span
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -118,11 +120,11 @@ const SignUp = () => {
             {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
           </span>
         </div>
-
         <p className="text-red-500 text-sm -mt-1">
           {errors.confirmPassword?.message}
         </p>
       </div>
+
       {error && <p className="text-red-500 text-sm -mt-1">{error}</p>}
 
       <button className="bg-purple-500 text-white shadow-xl hover:bg-purple-600 py-1 rounded cursor-pointer mt-2 transition ease-in-out ">
@@ -131,12 +133,14 @@ const SignUp = () => {
           {loading && <Spinner />}
         </span>
       </button>
-      <Link to="/auth/login" className="text-center mt-2">
+
+      <Link to={`/${AUTH_ROUTE}/${LOGIN_ROUTE}`} className="text-center mt-2">
         Already have an account,{" "}
         <span className="text-blue-500 cursor-pointer hover:underline">
           login
         </span>
       </Link>
+
     </form>
   );
 };

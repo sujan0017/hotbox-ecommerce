@@ -31,10 +31,11 @@ export default function Contact() {
         <div className="border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm">
           <form className="space-y-5">
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Full Name
               </label>
               <input
+                id="name"
                 type="text"
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-red-500"
                 placeholder="Enter your name"
@@ -42,8 +43,11 @@ export default function Contact() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email
+              </label>
               <input
+                id="email"
                 type="email"
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-red-500"
                 placeholder="Enter your email"
@@ -51,8 +55,14 @@ export default function Contact() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Message</label>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium mb-2"
+              >
+                Message
+              </label>
               <textarea
+                id="message"
                 rows="5"
                 className="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-red-500"
                 placeholder="Write your message"

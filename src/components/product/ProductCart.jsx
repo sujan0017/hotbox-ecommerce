@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Spinner from "../Spinner";
 import AddProductForm from "./AddProductForm";
 import { addProductToCart } from "../../redux/cart/cartSlicer";
+import { PRODUCT_ROUTE } from "../../constant/route";
 
 function ProductCart({ product }) {
   const [deleteConfirm, setDeleteConfirm] = useState(false);
@@ -87,7 +88,7 @@ function ProductCart({ product }) {
               <CiEdit />
             </span>
             <Link
-              to={`/product/${product._id}`}
+              to={`/${PRODUCT_ROUTE}/${product._id}`}
               className="  text-sm text-center bg-blue-400 px-3 py-1 text-white hover:bg-blue-500 rounded "
             >
               View Detail

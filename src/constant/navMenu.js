@@ -1,36 +1,24 @@
+import { ABOUT_ROUTE, CONTACT_ROUTE, HOME_ROUTE, PRODUCT_ROUTE } from "./route";
+
 const navMenu = [
   {
     title: "Home",
-    href: "/",
-    isLoginStatus: true,
+    href: `${HOME_ROUTE}`,
   },
   {
     title: "Products",
-    href: "/product",
-    isLoginStatus: true,
+    href: `/${PRODUCT_ROUTE}`,
   },
 
   {
     title: "About",
-    href: "/about",
-    isLoginStatus: true,
+    href: `/${ABOUT_ROUTE}`,
   },
   {
     title: "Contact",
-    href: "/contact",
-    isLoginStatus: true,
+    href: `/${CONTACT_ROUTE}`,
   },
 
-  {
-    title: "Login",
-    href: "/auth/login",
-    isLoginStatus: false,
-  },
-  {
-    title: "Register",
-    href: "/auth/register",
-    isLoginStatus: false,
-  },
 ];
 
 export { navMenu };

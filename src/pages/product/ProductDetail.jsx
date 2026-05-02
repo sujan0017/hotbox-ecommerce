@@ -5,7 +5,11 @@ import { getProductById } from "../../redux/product/productAction";
 import Spinner from "../../components/Spinner";
 import { FaCartArrowDown } from "react-icons/fa";
 import Container from "../../components/Container";
-import { addProductToCart } from "../../redux/cart/cartSlicer";
+import {
+  addProductToCart,
+  productCartDecrement,
+  productCartIncrement,
+} from "../../redux/cart/cartSlicer";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -14,9 +18,11 @@ const ProductDetail = () => {
 
   const { selectedProduct, loading } = useSelector((state) => state.product);
 
-  const { product } = useSelector((state) => state.cart);
+  const { product: cartItems } = useSelector((state) => state.cart);
 
-  console.log(product)
+  const cartProduct = cartItems.find((p) => p._id === selectedProduct._id);
+
+  const quantity = cartProduct ? cartProduct.quantity : 0;
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -77,11 +83,17 @@ const ProductDetail = () => {
             <div className="flex flex-col gap-2">
               <h5 className="font-semibold ">Quantity</h5>
               <div className="flex items-center justify-start gap-5">
-                <button className="border px-3 py-2 rounded border-slate-200">
+                <button
+                  onClick={() => dispatch(productCartDecrement(id))}
+                  className="border px-3 py-2 rounded border-slate-200"
+                >
                   -
                 </button>
-                <h5>{product.quantity}</h5>
-                <button className="border px-3 py-2 rounded border-slate-200">
+                <h5>{quantity}</h5>
+                <button
+                  onClick={() => dispatch(productCartIncrement(id))}
+                  className="border px-3 py-2 rounded border-slate-200"
+                >
                   +
                 </button>
               </div>

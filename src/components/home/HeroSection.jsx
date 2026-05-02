@@ -1,6 +1,7 @@
 import heroImg from "../../assets/heroImg.png";
+import { PRODUCT_ROUTE } from "../../constant/route";
 import { PrimaryButton, SecondaryButton } from "../Button";
-import  Container  from "../Container";
+import Container from "../Container";
 
 const HeroSection = () => {
   return (
@@ -13,8 +14,8 @@ const HeroSection = () => {
             pieces curated to make every moment stylish.
           </p>
           <div className="flex items-center gap-5">
-            <PrimaryButton title={"Shop Trends"} href={"/product"} />
-            <SecondaryButton title={"New Arrivals"} href={"/product"} />
+            <PrimaryButton title={"Shop Trends"} href={`/${PRODUCT_ROUTE}`} />
+            <SecondaryButton title={"New Arrivals"} href={`/${PRODUCT_ROUTE}`} />
           </div>
         </div>
         <div className="w-1/2">

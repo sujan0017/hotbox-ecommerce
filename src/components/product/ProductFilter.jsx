@@ -41,13 +41,6 @@ function ProductFilter() {
         </div>
         <div className="flex items-center gap-2">
           <label htmlFor="category">Category</label>
-          {/* <input
-          onChange={(e) => filtersByCategory(e.target.value)}
-          id="category"
-          type="text"
-          value={query?.filters?.category}
-          className=" border border-slate-200 rounded p-1"
-        /> */}
           <select
             onChange={(e) => filtersByCategory(e.target.value)}
             name="category"

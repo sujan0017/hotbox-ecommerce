@@ -2,6 +2,7 @@ import MissionSection from "../components/about/MissionSection";
 import StatsSection from "../components/about/StatsSection";
 import ValueSection from "../components/about/ValueSection";
 import Hero from "../components/Hero";
+import { AUTH_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from "../constant/route";
 
 export default function About() {
   return (
@@ -23,6 +24,7 @@ export default function About() {
           secondaryBtnHref={"/"}
         />
       </div>
+      
       <StatsSection />
       <MissionSection />
       <ValueSection />
@@ -34,9 +36,9 @@ export default function About() {
           "Thousands of people are sharing, connecting, and building communities on Hotbox right now."
         }
         primaryBtnTitle={"Create Free Account"}
-        primaryBtnHref={"/auth/login"}
+        primaryBtnHref={`/${AUTH_ROUTE}/${LOGIN_ROUTE}`}
         secondaryBtnTitle={"Sign In"}
-        secondaryBtnHref={"/auth/register"}
+        secondaryBtnHref={`/${AUTH_ROUTE}/${REGISTER_ROUTE}`}
       />
     </>
     // </div>
